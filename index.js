@@ -19,7 +19,7 @@ document.getElementById('ticker-input-form').addEventListener('submit', (e) => {
         const label = document.getElementsByTagName('label')[0]
         label.style.color = 'red'
         label.textContent = 'You must add at least one ticker. A ticker is a 3 letter or more code for a stock. E.g TSLA for Tesla.'
-    } 
+    }
 })
 
 function renderTickers() {
@@ -47,7 +47,7 @@ async function fetchStockData() {
     loadingArea.style.display = 'flex'
     try {
         const stockData = await Promise.all(tickersArr.map(async (ticker) => {
-            const url = `https://polygon-api-worker.guil-9d2.workers.dev/?ticker=${ticker}&startDate=${dates.startDate}&endDate=${dates.endDate}`
+            const url = `https://polygon-api-worker.clancandy1994.workers.dev/?ticker=${ticker}&startDate=${dates.startDate}&endDate=${dates.endDate}`
             const response = await fetch(url)
             if (!response.ok) {
                 const errMsg = await response.text()
@@ -80,10 +80,10 @@ async function fetchReport(data) {
             `
         }
     ]
-    
+
     try {
         const url = 'https://openai-api-worker.guil-9d2.workers.dev'
-        
+
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -92,7 +92,7 @@ async function fetchReport(data) {
             body: JSON.stringify(messages)
         })
         const data = await response.json()
-        
+
         if (!response.ok) {
             throw new Error(`Worker Error: ${data.error}`)
         }
